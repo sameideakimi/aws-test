@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello, EJS</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/main.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <h1>MEMBER</h1>
+  <% if(MEMBERS.length !== 0) { %>
+  <% for (let i = 0; i < MEMBERS.length; i ++) { %>
+  <ol>
+    <li>
+      아이디 : <%= MEMBERS[i].id %>
+    </li>
+    <li>
+      아이디 : <%= MEMBERS[i].password %>
+    </li>
+  </ol>
+  <% } %>
+  <% } else { %>
+  <p>회원 데이터가 없습니다.</p>
+  <% } %>
+
+</body>
+
+<script>
+  function deleteUser(userID) {
+    fetch(`http://localhost:4000/users/${userID}`, {
+      method: 'delete',
+      headers: {
+        'Content-type': 'application/json'
+      }
+    }).then((res) => {
+      console.log(res);
+      location.reload();
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+</script>
+
+</html>
